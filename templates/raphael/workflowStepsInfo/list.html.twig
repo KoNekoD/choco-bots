@@ -1,0 +1,10 @@
+<b>Список ws:</b>
+{% if items|length > 0 %}
+    {% for key,item in items %}
+        {% set title = item.title ~ ' (' ~ item.id ~ ')' %}
+        <b>• {{ key+1 }}</b> - <b>{{ title }}</b>
+        {{ item.description }}
+    {% endfor %}
+{% else %}
+    <b>Нет ws</b>
+{% endif %}

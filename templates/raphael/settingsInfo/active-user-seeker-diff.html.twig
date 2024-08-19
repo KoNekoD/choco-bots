@@ -1,0 +1,4 @@
+<b>Настройки ActiveUserSeeker</b>
+<b>• Активен:</b> {{ settings_prev is not null ? settings_prev.enabled : 'не определено' }} -> {{ settings_new is not null ? settings_new.enabled : 'не определено' }}
+<b>• Режим:</b> {{ settings_prev is not null ? settings_prev.mode.value : 'не определен' }} -> {{ settings_new is not null ? settings_new.mode.value : 'не определен' }}
+<b>• Целевой показатель:</b> {{ settings_prev is not null ? settings_prev.targetCount : 'не определен' }} -> {{ settings_new is not null ? settings_new.targetCount : 'не определен' }}

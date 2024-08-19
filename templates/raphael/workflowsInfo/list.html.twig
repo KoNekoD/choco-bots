@@ -1,0 +1,4 @@
+<b>Список workflows:</b>
+{% for item in items %}
+    <b>• {{ item.id }}</b> - <b>{{ item.name }} {% if item.active %}🍏{% else %}🍎{% endif %}</b>
+{% endfor %}

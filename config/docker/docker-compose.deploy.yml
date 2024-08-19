@@ -1,0 +1,26 @@
+version: "3.8"
+
+name: choco
+
+services:
+  choco-php-fpm:
+    container_name: choco-php-fpm
+    build:
+      context: ./../../
+      dockerfile: ./config/docker/Dockerfile
+      args:
+        - APP_ENV=${APP_ENV}
+        - PUID=${PUID}
+        - PGID=${PGID}
+        - SUPERVISOR_RPC_PORT=${SUPERVISOR_RPC_PORT}
+        - SUPERVISOR_RPC_USERNAME=${SUPERVISOR_RPC_USERNAME}
+        - SUPERVISOR_RPC_PASSWORD=${SUPERVISOR_RPC_PASSWORD}
+    ports:
+      - ${SUPERVISOR_RPC_PORT}:${SUPERVISOR_RPC_PORT}
+    networks:
+      - choco_network
+
+networks:
+  choco_network:
+    name: choco_network
+    external: true

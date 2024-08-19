@@ -1,0 +1,11 @@
+parameters:
+  telegram_bot_route_secret: '%env(TELEGRAM_BOT_ROUTE_SECRET)%'
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: true
+
+  App\Tests\Resource\Fixture\:
+    resource: '../tests/Resource/Fixture/'

@@ -1,0 +1,126 @@
+parameters:
+  telegram_bot_route_secret: '%env(TELEGRAM_BOT_ROUTE_SECRET)%'
+
+services:
+  # default configuration for services in *this* file
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+  # makes classes in src/ available to be used as services
+  # this creates a service per class whose id is the fully-qualified class name
+  App\:
+    resource: '../src/'
+    exclude:
+      - '../src/**/**/{DTO,Enum,Entity,Exception,Kernel.php}'
+      - '../src/**/Domain/Event'
+
+  _instanceof:
+    App\Shared\Application\Command\CommandHandlerInterface:
+      tags:
+        - { name: messenger.message_handler, bus: command.bus }
+
+    App\Shared\Application\Query\QueryHandlerInterface:
+      tags:
+        - { name: messenger.message_handler, bus: query.bus }
+
+    App\Shared\Domain\Event\EventHandlerInterface:
+      tags:
+        - { name: messenger.message_handler, bus: event.bus }
+
+    App\Shared\Domain\Specification\SpecificationInterface:
+      tags:
+        - { name: controller.service_arguments }
+
+  App\Shared\Infrastructure\Doctrine\DomainEventSubscriber:
+    arguments:
+      - '@App\Shared\Application\Event\EventBusInterface'
+      - '@service_container'
+    tags: [ { name: 'doctrine.event_subscriber' } ]
+
+  App\Shared\Application\EventListener\ExceptionListener:
+    tags:
+      - { name: kernel.event_listener, event: kernel.exception }
+
+  #      App\Shared\Application\EventListener\ExceptionListener:
+  #        tags:
+  #          - { name: kernel.event_listener, event: kernel.exception }
+
+  #
+  # Just documentation controller
+  #
+
+  App\Main\Infrastructure\Controller\:
+    resource: '../src/Main/Infrastructure/Controller/'
+    tags: [ 'controller.service_arguments' ]
+
+  #
+  # Chat client API here (See api factory):
+  # They cat just extends from main implementations
+  #
+
+  App\Choco\Infrastructure\ChatClientAPI\:
+    resource: '../src/Choco/Infrastructure/ChatClientAPI'
+    #        exclude:
+    #            '../src/Choco/Infrastructure/ChatClientAPI/**/*Structure.php'
+    tags:
+      - { name: 'main.bot_api' }
+      - { name: 'choco.bot_api' }
+
+  #
+  # Chat commands sections
+  # They can just extend from main AbstractChatCommand
+  #
+
+  App\Choco\Application\ChatCommand\:
+    resource: '../src/Choco/Application/ChatCommand'
+    exclude:
+      - '../src/Choco/Application/ChatCommand/**/*Handler.php'
+      - '../src/Choco/Application/ChatCommand/**/**/*Handler.php'
+      - '../src/Choco/Application/ChatCommand/**/**/**/*Handler.php'
+      - '../src/Choco/Application/ChatCommand/**/**/**/**/**/*Handler.php'
+      - '../src/Choco/Application/ChatCommand/**/**/**/**/**/**/*Handler.php'
+      - '../src/Choco/Application/ChatCommand/**/**/**/**/**/**/**/*Handler.php'
+      - '../src/Choco/Application/ChatCommand/**/**/**/**/**/**/**/**/*Handler.php'
+      - '../src/Choco/Application/ChatCommand/**/**/**/**/**/**/**/**/**/*Handler.php'
+      - '../src/Choco/Application/ChatCommand/**/*Provider.php'
+      - '../src/Choco/Application/ChatCommand/**/**/*Provider.php'
+      - '../src/Choco/Application/ChatCommand/**/**/**/*Provider.php'
+      - '../src/Choco/Application/ChatCommand/**/**/**/**/**/*Provider.php'
+      - '../src/Choco/Application/ChatCommand/**/**/**/**/**/**/*Provider.php'
+      - '../src/Choco/Application/ChatCommand/**/**/**/**/**/**/**/*Provider.php'
+      - '../src/Choco/Application/ChatCommand/**/**/**/**/**/**/**/**/*Provider.php'
+      - '../src/Choco/Application/ChatCommand/**/**/**/**/**/**/**/**/**/*Provider.php'
+    tags:
+      - { name: 'main.chat_command' }
+      - { name: 'choco.chat_command' }
+
+  #
+  # Chat client API Factory here (See api):
+  # They cat just extends from main implementations
+  #
+
+  App\Main\Infrastructure\Service\ChatClientApiProviderFactory:
+    arguments:
+      - !tagged_iterator { tag: 'main.bot_api', default_index_method: getChatClientAdapterName }
+
+  App\Choco\Infrastructure\Service\ChatClientApiProviderFactory:
+    arguments:
+      - !tagged_iterator { tag: 'choco.bot_api', default_index_method: getChatClientAdapterName }
+
+  #
+  # Chat command handlers here:
+  # They cat just extends from AbstractChatCommandHandlerFactory
+  #
+
+  App\Main\Application\Service\AbstractChatCommandHandlerFactory: # Please use this class if you know what you do
+    arguments:
+      - !tagged_iterator { tag: 'main.chat_command', default_index_method: getChatCommandPattern }
+
+  App\Choco\Application\Service\ChocoChatCommandHandlerFactory:
+    arguments:
+      - !tagged_iterator { tag: 'choco.chat_command', default_index_method: getChatCommandPattern }
+
+
+  # add more service definitions when explicit configuration is needed
+  # please note that last definitions always *replace* previous ones

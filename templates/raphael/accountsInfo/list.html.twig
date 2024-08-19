@@ -1,0 +1,20 @@
+Список аккаунтов:
+{% set rowTotal = 0 %}
+{% for key,item in items %}
+    •{{ key+1 }}.{{ item.account.id }} - {% if item.hasPeerFlood %}🚨{% else %}🍏{% endif %}{{ item.firstname }} {{ item.lastname }}
+    Username: @{{ item.username }}
+    Участники обновлены: {% if item.lastGetParticipantsExecutedAt is not null %}{{ item.lastGetParticipantsExecutedAt|date('d.m.Y H:i:s') }}{% else %}-{% endif %}
+    Сейчас собрано: {{ item.collectedParticipantsCount }}
+    {% set rowTotal = rowTotal + item.collectedParticipantsCount %}
+    Используется прокси: {{ item.account.proxy.stringRow }}
+    Новых пользователей: {{ item.usersAdded }}
+    Обновленных пользователей: {{ item.usersUpdated }}
+    Удаленных пользователей: {{ item.usersDeleted }}
+    Обнаружен контакт: {{ item.contactsAdded }}
+    Удален контакт: {{ item.contactsDeleted }}
+    {% if item.account.broken %}
+        📛 Аккаунт сломан: {{ item.account.brokenAt | date('Y-m-d H:i:s') }}
+    {% endif %}
+    ________________________
+{% endfor %}
+Итого(участников собрано): {{ rowTotal|number_format(0, '.', ',') }}

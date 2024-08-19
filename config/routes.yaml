@@ -1,0 +1,7 @@
+main:
+  resource: ../src/Main/Infrastructure/Controller/
+  type: attribute
+
+BoShurikTelegramBotBundle:
+  resource: "@BoShurikTelegramBotBundle/Resources/config/routing.php"
+  prefix: /_telegram/{bot}/%telegram_bot_route_secret%

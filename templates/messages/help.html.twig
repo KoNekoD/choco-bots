@@ -1,0 +1,4 @@
+<b>Список доступных команд:</b>
+{% for command in commands %}
+    🔹 {{ command.chatCommandPattern }} - {{ command.chatCommandDescription }} ({{ command.chatCommandExample }} )
+{% endfor %}

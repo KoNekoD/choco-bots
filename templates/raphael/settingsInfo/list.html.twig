@@ -1,0 +1,28 @@
+Настройки:
+{% for smartWaitOption in settings.smartWaitOptions | default([]) %}
+    {% set is1 = smartWaitOption.iterationSleepNeededToBeActivated
+        ?
+        '🟩' ~
+        "( Сон: " ~ smartWaitOption.iterationSleepSeconds ~" сек, " ~
+        "Соль: " ~ smartWaitOption.iterationSleepSecondsRandomSaltN ~ " сек )"
+        :
+        '🟥' %}
+    {% set is2 = smartWaitOption.shortSleepNeededToBeActivated
+        ?
+        '🟩' ~
+        "( Сон: " ~ smartWaitOption.shortSleepSeconds ~" сек, " ~
+        "Соль: " ~ smartWaitOption.shortSleepSecondsRandomSaltN ~ " сек )"
+        :
+        '🟥' %}
+    {% set is3 = smartWaitOption.longSleepNeededToBeActivated
+        ?
+        '🟩' ~
+        "( Сон: " ~ smartWaitOption.longSleepSeconds ~" сек, " ~
+        "Соль: " ~ smartWaitOption.longSleepSecondsRandomSaltN ~ " сек )"
+        :
+        '🟥' %}
+    <b>Настройки {{ smartWaitOption.key }}</b>
+    <b>• Ход:</b> {{ is1 }}
+    <b>• Шорт:</b> {{ is2 }}
+    <b>• Лонг:</b> {{ is3 }}
+{% endfor %}

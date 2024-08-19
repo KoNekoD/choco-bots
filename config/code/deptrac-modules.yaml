@@ -1,0 +1,25 @@
+parameters:
+  paths:
+    - ../.././src
+  exclude_files:
+    - '#.*test.*#'
+  layers:
+    - name: Shared
+      collectors:
+        - type: directory
+          regex: /src/Shared/.*
+    - name: Choco
+      collectors:
+        - type: directory
+          regex: /src/Choco/.*
+    - name: Main
+      collectors:
+        - type: directory
+          regex: /src/Main/.*
+  ruleset:
+    Shared:
+    Choco:
+      - Shared
+      - Main
+    Main:
+      - Shared

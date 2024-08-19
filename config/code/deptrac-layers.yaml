@@ -1,0 +1,25 @@
+parameters:
+  paths:
+    - ../.././src
+  exclude_files:
+    - '#.*test.*#'
+  layers:
+    - name: Domain
+      collectors:
+        - type: directory
+          regex: /src/\w+/Domain/.*|/src/\w+/\w+/Domain/.*
+    - name: Application
+      collectors:
+        - type: directory
+          regex: /src/\w+/Application/.*|/src/\w+/\w+/Application/.*
+    - name: Infrastructure
+      collectors:
+        - type: directory
+          regex: /src/\w+/Infrastructure/.*|/src/\w+/\w+/Infrastructure/.*
+  ruleset:
+    Domain:
+    Application:
+      - Domain
+    Infrastructure:
+      - Application
+      - Domain

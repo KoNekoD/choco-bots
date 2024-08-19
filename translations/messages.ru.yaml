@@ -1,0 +1,39 @@
+CommandFailedMessage: "Не удалось выполнить команду. Ошибка: %s"
+
+MemberNotFound: Не удалось найти указанного участника в данном чате. Пусть он напишет хоть одно сообщение
+
+MessageNotFound: Указанное сообщение не найдено в этом чате
+
+ChatMemberAccessDenied: Данное действие запрещено для вашего ранга. Ранг цели выше или равен вашему
+
+ChatMemberReputationSelfPromotion: Повышение репутации самому себе не разрешено
+ChatMemberReputationSelfDemotion: Понижение репутации самому себе не разрешено
+
+ChangedRank: Теперь пользователь @%s имеет ранг %s
+ChangedReputation: Теперь пользователь @%s имеет репутацию %s
+ChatMemberQuotaExceeded: Вы превысили свою квоту изменений репутаций
+
+AccessDeniedChatMemberIsLeaved: Выбранный участник покинул этот чат
+AccessDeniedChatMemberIsKicked: Выбранный участник был кикнут из чата
+AccessDeniedChatMemberIsAdministrator: Выбранный участник это администратор
+AccessDeniedChatMemberIsCreator: Выбранный участник это создатель чата
+
+AccessDeniedChatMemberIsNotModerator: Выбранный участник не имеет ранга модератора
+
+ChatMemberSuccessfullyMuted: 'Участник @%s замучен на %s'
+ChatMemberSuccessfullyWarned: 'Участник @%s получил предупреждение до %s, причина: %s'
+
+CommandIsNotAllowedInChatType: Данная команда не разрешена в %s
+CommandRequireReplyToMessage: Данная команда требует ответа на сообщение
+
+ChatMemberIsLeft: Выбранный участник вышел из чата
+ChatMemberIsKicked: Выбранный участник был выгнан из чата
+
+# ChocoChat Configuration:
+EnabledNewMemberInSystemNotify: Включено оповещение о новых участниках чата в системе
+DisabledNewMemberInSystemNotify: Выключено оповещение о новых участниках чата в системе
+EnabledMute: Включена возможность глушить участников
+DisabledMute: Выключена возможность глушить участников
+
+# Required ChocoChat Configuration:
+RequiredEnabledMute: Данная команда требует включения возможности глушить участников в конфигурации чата

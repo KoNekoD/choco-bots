@@ -1,0 +1,14 @@
+Список прокси:
+{% set rowTotal = 0 %}
+{% for key,item in items %}
+    • {{ key+1 }}.{{ item.id }} - {% if item.broken %}🚨{% else %}🍏{% endif %}{{ item.host }}:{{ item.port }}
+    Тип: {{ item.type.value }}
+    Привязано аккаунтов: {{ item.linkedAccountsCount }}
+    {% if item.login is not null and item.password is not null %}
+        Логин: {{ item.login }}
+        Пароль: {{ item.password }}
+    {% endif %}
+    {% if item.broken %}
+        📛 Прокси сломан: {{ item.brokenAt | date('Y-m-d H:i:s') }}
+    {% endif %}
+{% endfor %}

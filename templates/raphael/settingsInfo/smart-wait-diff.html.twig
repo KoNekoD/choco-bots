@@ -1,0 +1,48 @@
+{% for item in diff %}
+    <b>Настройки {{ item.key.value }}</b>
+    {% set i_prev = item.prev.iterationSleepNeededToBeActivated
+        ?
+        '🟩' ~
+        "( Сон: " ~ item.prev.iterationSleepSeconds ~" сек, " ~
+        "Соль: " ~ item.prev.iterationSleepSecondsRandomSaltN ~ " сек )"
+        :
+        '🟥' %}
+    {% set s_prev = item.prev.shortSleepNeededToBeActivated
+        ?
+        '🟩' ~ "(" ~ item.prev.shortSleepActivateCount ~ ")" ~
+        "( Сон: " ~ item.prev.shortSleepSeconds ~" сек, " ~
+        "Соль: " ~ item.prev.shortSleepSecondsRandomSaltN ~ " сек )"
+        :
+        '🟥' %}
+    {% set l_prev = item.prev.longSleepNeededToBeActivated
+        ?
+        '🟩' ~ "(" ~ item.prev.longSleepActivateCount ~ ")" ~
+        "( Сон: " ~ item.prev.longSleepSeconds ~" сек, " ~
+        "Соль: " ~ item.prev.longSleepSecondsRandomSaltN ~ " сек )"
+        :
+        '🟥' %}
+    {% set i_new = item.new.iterationSleepNeededToBeActivated
+        ?
+        '🟩' ~
+        "( Сон: " ~ item.new.iterationSleepSeconds ~" сек, " ~
+        "Соль: " ~ item.new.iterationSleepSecondsRandomSaltN ~ " сек )"
+        :
+        '🟥' %}
+    {% set s_new = item.new.shortSleepNeededToBeActivated
+        ?
+        '🟩' ~ "(" ~ item.new.shortSleepActivateCount ~ ")" ~
+        "( Сон: " ~ item.new.shortSleepSeconds ~" сек, " ~
+        "Соль: " ~ item.new.shortSleepSecondsRandomSaltN ~ " сек )"
+        :
+        '🟥' %}
+    {% set l_new = item.new.longSleepNeededToBeActivated
+        ?
+        '🟩' ~ "(" ~ item.new.longSleepActivateCount ~ ")" ~
+        "( Сон: " ~ item.new.longSleepSeconds ~" сек, " ~
+        "Соль: " ~ item.new.longSleepSecondsRandomSaltN ~ " сек )"
+        :
+        '🟥' %}
+    <b>• Ход:</b> {{ i_prev == i_new ? i_prev : i_prev ~ " -> " ~ i_new }}
+    <b>• Шорт:</b> {{ s_prev == s_new ? s_prev : s_prev ~ " -> " ~ s_new }}
+    <b>• Лонг:</b> {{ l_prev == l_new ? l_prev : l_prev ~ " -> " ~ l_new }}
+{% endfor %}

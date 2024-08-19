@@ -1,0 +1,9 @@
+<b>Список активных задач:</b>
+{% for key,item in items %}
+    <b>•</b>{{ key+1 }}.<b>{{ item.id }}</b>
+    <b>Account: {{ item.account.id }}: {{ item.account.user.firstname }} {{ item.account.user.lastname }}</b>
+    {% if item.progressMax is not null and item.progressCurrent is not null %}<b>Прогресс: {{ item.progressCurrent }} / {{ item.progressMax }}</b>{% endif %}
+    {% if item.summary is not null %}<b>Текст: {{ item.summary }}</b>{% endif %}
+    Запущена: {{ item.createdAt|date('d.m.Y H:i:s') }}
+    <u>________________________</u>
+{% endfor %}

@@ -1,0 +1,6 @@
+boshurik_telegram_bot:
+  api:
+    default_bot: first
+    bots:
+      first: 123456789:ABCD1234****4321CBA
+      cock5: '%env(resolve:COCK5_BOT_TOKEN)%'

@@ -1,0 +1,31 @@
+version: "3.8"
+
+name: choco
+
+services:
+  choco-php-fpm:
+    container_name: choco-php-fpm
+    user: app
+    build:
+      context: ./../../
+      dockerfile: ./config/docker/Dockerfile
+      args:
+        - APP_ENV=dev
+        - PUID=1000
+        - PGID=1000
+        - SUPERVISOR_RPC_PORT=9551
+        - SUPERVISOR_RPC_USERNAME=choco
+        - SUPERVISOR_RPC_PASSWORD=choco
+        - PHP_IDE_CONFIG=serverName=Docker
+        - DEV_XDEBUG_AUTOSTART=trigger
+        - DEV_HOST_IP=172.18.4.1
+        - DEV_XDEBUG_IDE_KEY=PHPSTORM
+    volumes:
+      - ./../../:/var/www/choco:cached
+    networks:
+      - choco_network
+
+networks:
+  choco_network:
+    name: choco_network
+    external: true

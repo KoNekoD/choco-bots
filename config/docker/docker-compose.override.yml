@@ -1,0 +1,9 @@
+version: "3.8"
+
+name: choco
+
+services:
+  choco-php-fpm:
+    build:
+      args:
+        - DEV_XDEBUG_AUTOSTART=yes

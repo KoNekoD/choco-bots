@@ -1,0 +1,39 @@
+CommandFailedMessage: "Failed command. Error: %s"
+
+MemberNotFound: The specified participant could not be found in this chat. Ask him write at least one message
+
+MessageNotFound: The specified message not found in this chat
+
+ChatMemberAccessDenied: This action is prohibited for your rank level. The target's rank is higher than or equal to yours
+
+ChatMemberReputationSelfPromotion: ChocoChat member reputation self promotion is not allowed
+ChatMemberReputationSelfDemotion: ChocoChat member reputation self demotion is not allowed
+
+ChangedRank: Now user @%s have rank %s
+ChangedReputation: Now user @%s have reputation %s
+ChatMemberQuotaExceeded: You have exceeded your reputation change quota
+
+AccessDeniedChatMemberIsLeaved: The selected participant is leaved from this chat
+AccessDeniedChatMemberIsKicked: The selected member has been kicked from the chat
+AccessDeniedChatMemberIsAdministrator: The selected member is an administrator
+AccessDeniedChatMemberIsCreator: The selected participant is the chat creator
+
+AccessDeniedChatMemberIsNotModerator: The selected member does not have a moderator rank
+
+ChatMemberSuccessfullyMuted: 'ChocoChat member @%s muted for %s'
+ChatMemberSuccessfullyWarned: 'ChocoChat member @%s warned until %s, reason: %s'
+
+CommandIsNotAllowedInChatType: This command is not allowed in %s
+CommandRequireReplyToMessage: This command require reply to message
+
+ChatMemberIsLeft: Selected chat member is left from this chat
+ChatMemberIsKicked: Selected chat member is kicked from this chat
+
+# ChocoChat Configuration:
+EnabledNewMemberInSystemNotify: Enabled notify about new chat member in system
+DisabledNewMemberInSystemNotify: Disabled notify about new chat member in system
+EnabledMute: Enabled mute chat member feature
+DisabledMute: Disabled mute chat member feature
+
+# Required ChocoChat Configuration:
+RequiredEnabledMute: This command required enable mute chat members feature in chat configuration
